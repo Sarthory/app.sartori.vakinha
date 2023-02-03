@@ -119,22 +119,20 @@ class _BagItemsPageState extends BaseState<BagItemsPage, BagItemsController> {
                           Text(
                             "💲Total do pedido 👉",
                             style: context.textStyles.textExtraBold.copyWith(
-                              fontSize: 16,
+                              fontSize: 18,
                             ),
                           ),
                           Text(
                             r"R$50,00",
                             style: context.textStyles.textExtraBold.copyWith(
-                              fontSize: 20,
+                              fontSize: 22,
                             ),
                           )
                         ],
                       ),
                     ),
-                    Divider(),
-                    SizedBox(
-                      height: 10,
-                    ),
+                    Divider(color: Colors.grey),
+                    SizedBox(height: 10),
                     OrderTextField(
                       title: 'Endereço de Entrega',
                       controller: _addressEC,
@@ -143,9 +141,7 @@ class _BagItemsPageState extends BaseState<BagItemsPage, BagItemsController> {
                       ),
                       placeholder: 'Digite o endereço que receberá os produtos',
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
+                    SizedBox(height: 20),
                     OrderTextField(
                       title: 'CPF',
                       controller: _cpfEC,
@@ -154,9 +150,7 @@ class _BagItemsPageState extends BaseState<BagItemsPage, BagItemsController> {
                       ),
                       placeholder: 'Digite o CPF',
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    const SizedBox(height: 20),
                     BlocSelector<BagItemsController, BagItemsState,
                         List<PaymentTypeModel>>(
                       selector: (state) => state.paymentTypes,
@@ -186,9 +180,7 @@ class _BagItemsPageState extends BaseState<BagItemsPage, BagItemsController> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Divider(
-                      color: Colors.grey,
-                    ),
+                    Divider(color: Colors.grey),
                     Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: DeliveryButton(
