@@ -1,3 +1,4 @@
+import 'package:dw9_delivery_app/app/core/extensions/formatter_extension.dart';
 import 'package:dw9_delivery_app/app/core/ui/styles/colors_app.dart';
 import 'package:dw9_delivery_app/app/core/ui/styles/text_styles.dart';
 import 'package:dw9_delivery_app/app/core/ui/widgets/delivery_increment_decrement_button.dart';
@@ -6,25 +7,30 @@ import 'package:flutter/material.dart';
 
 class OrderItemTile extends StatelessWidget {
   final int index;
-  final OrderProductDto? orderProduct;
+  final OrderProductDto bagItem;
 
   const OrderItemTile({
     super.key,
     required this.index,
-    required this.orderProduct,
+    required this.bagItem,
   });
 
   @override
   Widget build(BuildContext context) {
+    final product = bagItem.product;
+
     return Row(
       children: [
         Padding(
           padding: const EdgeInsets.all(10),
-          child: Image.network(
-            'https://assets.unileversolutions.com/recipes-v2/106684.jpg?imwidth=800',
-            width: 100,
-            height: 100,
-            fit: BoxFit.cover,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image.network(
+              product.image,
+              width: 100,
+              height: 100,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
         Expanded(
@@ -34,7 +40,7 @@ class OrderItemTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'X-Burger',
+                  product.name,
                   style: context.textStyles.textMedium.copyWith(
                     fontSize: 16,
                   ),
@@ -46,14 +52,14 @@ class OrderItemTile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      r"R$19,90",
+                      (bagItem.amount * product.price).toCurrencyPTBR,
                       style: context.textStyles.textRegular.copyWith(
                         fontSize: 14,
                         color: ColorsApp.i.secondary,
                       ),
                     ),
                     DeliveryIncrementDecrementButton.compact(
-                      amount: 1,
+                      amount: bagItem.amount,
                       incrementTap: () {},
                       decrementTap: () {},
                     ),
