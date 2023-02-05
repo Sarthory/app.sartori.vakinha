@@ -85,6 +85,7 @@ class _LoginPageState extends BaseState<LoginPage, LoginController> {
                       TextFormField(
                         //PASSWORD
                         controller: _passwordEC,
+                        obscureText: true,
                         decoration: const InputDecoration(
                           label: Text('Senha'),
                         ),

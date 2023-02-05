@@ -1,9 +1,7 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:dw9_delivery_app/app/models/payment_type_model.dart';
+import 'package:dw9_delivery_app/app/dto/order_product_dto.dart';
 import 'package:equatable/equatable.dart';
 import 'package:match/match.dart';
-
-import 'package:dw9_delivery_app/app/dto/order_product_dto.dart';
-import 'package:dw9_delivery_app/app/models/payment_type_model.dart';
 
 part 'bag_items_state.g.dart';
 
@@ -12,6 +10,10 @@ enum BagItemsStatus {
   initial,
   loading,
   loaded,
+  updated,
+  confirmRemove,
+  emptyBag,
+  success,
   error,
 }
 
@@ -34,6 +36,11 @@ class BagItemsState extends Equatable {
         bagItems = const [],
         errorMessage = null;
 
+  double get totalBagValue => bagItems.fold(
+        0.0,
+        (previousValue, item) => previousValue + item.totalPrice,
+      );
+
   @override
   List<Object?> get props => [status, paymentTypes, bagItems, errorMessage];
 
@@ -50,4 +57,18 @@ class BagItemsState extends Equatable {
       errorMessage: errorMessage ?? this.errorMessage,
     );
   }
+}
+
+class ConfirmRemoveBagItemsState extends BagItemsState {
+  final OrderProductDto orderProduct;
+  final int index;
+
+  const ConfirmRemoveBagItemsState({
+    required this.index,
+    required this.orderProduct,
+    required super.status,
+    required super.paymentTypes,
+    required super.bagItems,
+    super.errorMessage,
+  });
 }

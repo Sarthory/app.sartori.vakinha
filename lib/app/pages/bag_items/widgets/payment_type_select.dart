@@ -51,7 +51,10 @@ class PaymentTypeSelect extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                          const Icon(Icons.arrow_forward_ios_rounded)
+                          Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            color: valid ? Colors.black : Colors.red,
+                          )
                         ],
                       ),
                     ),
