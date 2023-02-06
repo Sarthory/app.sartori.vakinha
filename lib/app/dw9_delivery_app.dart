@@ -21,18 +21,19 @@ class Dw9DeliveryApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ApplicationBinding(
       child: MaterialApp(
-          navigatorKey: _navKey,
-          title: "Vakinha Burger",
-          theme: ThemeConfig.theme,
-          routes: {
-            '/': (context) => const SplashPage(),
-            '/home': (context) => HomeRouter.page,
-            '/productDetail': (context) => ProductDetailRouter.page,
-            '/login': (context) => LoginRouter.page,
-            '/register': (context) => RegisterRouter.page,
-            '/bagItems': (context) => BagItemsRouter.page,
-            '/orderCompleted': (context) => OrderCompleted(),
-          }),
+        navigatorKey: _navKey,
+        title: "Vakinha Burger",
+        theme: ThemeConfig.theme,
+        routes: {
+          '/': (context) => const SplashPage(),
+          '/home': (context) => HomeRouter.page,
+          '/productDetail': (context) => ProductDetailRouter.page,
+          '/login': (context) => LoginRouter.page,
+          '/register': (context) => RegisterRouter.page,
+          '/bagItems': (context) => BagItemsRouter.page,
+          '/orderCompleted': (context) => OrderCompleted(),
+        },
+      ),
     );
   }
 }

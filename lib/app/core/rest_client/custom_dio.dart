@@ -23,7 +23,7 @@ class CustomDio extends DioForNative {
       ),
     );
 
-    _authInterceptor = AuthInterceptor();
+    _authInterceptor = AuthInterceptor(this);
   }
 
   CustomDio auth() {

@@ -17,7 +17,9 @@ class HomeRouter {
             ),
           ),
           Provider(
-            create: (context) => HomeController(context.read()),
+            create: (context) => HomeController(
+              context.read(),
+            ),
           )
         ],
         child: const HomePage(),

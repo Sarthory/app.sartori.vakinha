@@ -1,5 +1,5 @@
 import 'dart:developer';
-
+import 'package:dw9_delivery_app/app/core/exceptions/repository_exception.dart';
 import 'package:dw9_delivery_app/app/dto/order_product_dto.dart';
 import 'package:dw9_delivery_app/app/pages/home/home_state.dart';
 import 'package:dw9_delivery_app/app/repositories/products/products_repository.dart';
@@ -19,16 +19,17 @@ class HomeController extends Cubit<HomeState> {
       final products = await _productsRepository.findAllProducts();
 
       emit(state.copyWith(status: HomeStateStatus.loaded, products: products));
-    } catch (e, s) {
+    } on RepositoryException catch (e, s) {
       log(
-        'Erro ao buscar produtos',
+        e.message,
         error: e,
         stackTrace: s,
       );
+
       emit(
         state.copyWith(
           status: HomeStateStatus.error,
-          errorMessage: 'Erro ao buscar produtos',
+          errorMessage: e.message,
         ),
       );
     }
@@ -37,8 +38,9 @@ class HomeController extends Cubit<HomeState> {
   void addOrUpdateBagItems(OrderProductDto orderProduct) {
     final shoppingBag = [...state.shoppingBag];
 
-    final productIndex =
-        shoppingBag.indexWhere((o) => o.product == orderProduct.product);
+    final productIndex = shoppingBag.indexWhere(
+      (o) => o.product == orderProduct.product,
+    );
 
     if (productIndex > -1) {
       orderProduct.amount != 0
